@@ -1,24 +1,30 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/index.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "https://sky-price.vercel.app",
-        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
-        "Access-Control-Allow-Headers": "X-Requested-With,Content-Type,Authorization",
-        "Access-Control-Allow-Credentials": "true"
+    "version": 2,
+    "builds": [
+      {
+        "src": "src/index.ts",
+        "use": "@vercel/node"
       }
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "methods": ["OPTIONS"],
+        "dest": "src/index.ts",
+        "headers": {
+          "Access-Control-Allow-Origin": "https://sky-price.vercel.app",
+          "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type,Authorization",
+          "Access-Control-Allow-Credentials": "true"
+        }
+      },
+      {
+        "src": "/api/(.*)",
+        "dest": "src/index.ts",
+        "headers": {
+          "Access-Control-Allow-Origin": "https://sky-price.vercel.app",
+          "Access-Control-Allow-Credentials": "true"
+        }
+      }
+    ]
   }
-}

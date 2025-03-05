@@ -13,12 +13,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Handling OPTIONS requests first
+app.options('*', cors({
+  origin: 'https://sky-price.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
+// Then applying the regular CORS middlewares
 app.use(cors({
-  origin: [
-    'https://sky-price.vercel.app',
-    'http://localhost:3000',
-    process.env.FRONTEND_URL || '*'
-  ],
+  origin: 'https://sky-price.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
