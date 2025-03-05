@@ -9,7 +9,13 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/index.js"
+      "dest": "dist/index.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://sky-price.vercel.app",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With,Content-Type,Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      }
     }
   ],
   "env": {

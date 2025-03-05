@@ -13,7 +13,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://sky-price.vercel.app',
+    'http://localhost:3000',
+    process.env.FRONTEND_URL || '*'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/flight-price-api';
